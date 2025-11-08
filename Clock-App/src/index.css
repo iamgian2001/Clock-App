@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+:root {
+  @apply bg-sky-900;
+}
+
+/* Hide arrows in number input (Chrome, Safari, Edge, Opera) */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Hide arrows in Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
