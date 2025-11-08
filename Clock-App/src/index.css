@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  @apply bg-sky-900;
+  @apply bg-radial-[at_25%_25%] from-gray-700 to-zinc-900 to-75% font-sans;
 }
 
 /* Hide arrows in number input (Chrome, Safari, Edge, Opera) */
