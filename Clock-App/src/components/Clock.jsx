@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import useSound from "use-sound";
 import dingSound from "/public/sounds/ding.mp3";
+import { motion } from "motion/react";
 
 function Clock() {
   const [seconds, setSeconds] = useState(0);
@@ -8,7 +9,14 @@ function Clock() {
   const [hours, setHours] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [playDing] = useSound(dingSound);
-  const [angle, setAngle] = useState();
+  const [angle, setAngle] = useState(0);
+
+  const box = {
+    width: 100,
+    height: 100,
+    backgroundColor: "#ff0088",
+    borderRadius: 5,
+  };
 
   const PlayTimer = () => {
     for (let i = 1; i < 5; i++) {
@@ -18,15 +26,17 @@ function Clock() {
     }
   };
 
-  const ChangeAngle = () => {
-    if (angle <= 90 && angle > 0) {
-      return setAngle((prev) => prev - 1);
-    } else if (angle == 0) {
-      return setAngle(360);
-    } else {
-      return setAngle((prev) => prev + 1);
-    }
-  };
+  useEffect(() => {
+    if (!isRunning) return setAngle(0);
+
+    const interval = setInterval(() => {
+      {
+        setAngle((prev) => prev + 36);
+      }
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, [isRunning]);
 
   const HandleTimeChange = (event) => {
     const { name, value } = event.target;
@@ -63,7 +73,6 @@ function Clock() {
     const timer = setInterval(() => {
       setSeconds((s) => {
         if (s > 0) {
-          ChangeAngle();
           return s - 1;
         }
 
@@ -121,15 +130,21 @@ function Clock() {
   };
 
   return (
-    <div className="w-fit h-fit m-20 items-center justify-center">
-      <div className="w-120 z-0 h-120 absolute flex justify-center items-center rounded-full  bg-white/10 border   border-white/20 backdrop-blur-lg shadow-lg">
-        <div className="bg-red-600/40  w-7 h-7 rounded-full"></div>
-        <div
-          className={`bg-black/40 rounded-2xl absolute w-5/12 h-2 origin-left ml-12 ${angle}`}
-        ></div>
+    <div className="w-fit h-fit m-20 flex flex-col items-center justify-center">
+      {/* Clock circle */}
+      <div className="w-120 h-120 rounded-full relative  bg-white/10 border border-white/20 backdrop-blur-lg shadow-lg">
+        <div className="bg-neutral-600 border-2 bottom-1/2 left-1/2 border-red-600 absolute z-40 w-6 h-6 rounded-full"></div>
+        <motion.div
+          className="absolute w-1 bottom-1/2 left-1/2 z-10 h-24 border border-red-600 origin-bottom rounded-full"
+          animate={{ rotate: angle }}
+          transition={{ duration: 1 }}
+        />
       </div>
-      <div className="flex w-120 z-1 h-120 flex-col p-10 rounded-full text-amber-50 text-3xl justify-center items-center space-y-4">
-        <div className="flex flex-row relative  space-x-10">
+
+      {/* Controls below clock */}
+      <div className="flex flex-col p-10 rounded-xl absolute text-amber-50 text-3xl justify-center items-center space-y-4 mt-8">
+        <div className="flex flex-row space-x-10">
+          {/* Inputs */}
           <div className="flex flex-col items-center justify-center text-center border rounded-xl p-2">
             <p className="text-sm">HH</p>
             <input
@@ -164,6 +179,7 @@ function Clock() {
             />
           </div>
         </div>
+
         <div className="flex flex-col my-5">
           <button
             onClick={StartTimer}
