@@ -132,10 +132,10 @@ function Clock() {
   return (
     <div className="w-fit h-fit m-20 flex flex-col items-center justify-center">
       {/* Clock circle */}
-      <div className="w-120 h-120 rounded-full relative  bg-white/10 border border-white/20 backdrop-blur-lg shadow-lg">
-        <div className="bg-neutral-600 border-2 bottom-1/2 left-1/2 border-red-600 absolute z-40 w-6 h-6 rounded-full"></div>
+      <div className="w-120 h-120 rounded-full relative flex flex-row items-center justify-center  bg-white/10 border border-white/20 backdrop-blur-lg shadow-lg">
+        <div className="bg-neutral-600 border-2 bottom-1/2 left-1/2 border-red-600  z-40 w-6 h-6 rounded-full"></div>
         <motion.div
-          className="absolute w-1 bottom-1/2 left-1/2 z-10 h-24 border border-red-600 origin-bottom rounded-full"
+          className=" w-1 bottom-1/2 left-1/2 z-10 absolute  h-40 border border-red-600 origin-bottom rounded-full"
           animate={{ rotate: angle }}
           transition={{ duration: 1 }}
         />

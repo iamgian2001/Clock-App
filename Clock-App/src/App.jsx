@@ -1,12 +1,12 @@
 import "./App.css";
 import { Routes, Route } from "react-router";
-import Clock from "./components/Clock";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Clock />}></Route>
+        <Route path="/" element={<Dashboard />}></Route>
       </Routes>
     </>
   );
