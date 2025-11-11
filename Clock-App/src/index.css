@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  @apply bg-linear-120 from-gray-700 to-zinc-900 font-sans text-amber-50;
+  @apply w-full h-full bg-linear-120 from-gray-700 to-zinc-900 font-sans text-amber-50;
 }
 
 /* Hide arrows in number input (Chrome, Safari, Edge, Opera) */
